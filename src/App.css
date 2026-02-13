@@ -20,12 +20,14 @@ body {
   overflow: hidden;
 }
 
-/* Частицы фона */
+/* Фон с частицами - оптимизировано */
 .particle-background {
   position: absolute;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  pointer-events: none;
+  will-change: transform;
 }
 
 .particle {
@@ -36,6 +38,7 @@ body {
   border-radius: 50%;
   animation: float-particle linear infinite;
   pointer-events: none;
+  will-change: transform, opacity;
 }
 
 @keyframes float-particle {
@@ -44,7 +47,7 @@ body {
     opacity: 0;
   }
   50% {
-    opacity: 0.8;
+    opacity: 0.5;
     transform: translateY(50vh) scale(1);
   }
   100% {
@@ -53,14 +56,15 @@ body {
   }
 }
 
-/* Летающие сердечки */
+/* Летающие сердечки - оптимизировано */
 .floating-heart {
   position: absolute;
   bottom: -50px;
   animation: float-up linear infinite;
   pointer-events: none;
   z-index: 10;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+  will-change: transform, opacity;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
 }
 
 @keyframes float-up {
@@ -74,14 +78,15 @@ body {
   }
 }
 
-/* Искры */
+/* Искры - оптимизировано */
 .sparkle {
   position: absolute;
   background: white;
   border-radius: 50%;
   pointer-events: none;
   animation: sparkle-fade 1s ease-out forwards;
-  box-shadow: 0 0 10px gold, 0 0 20px gold;
+  box-shadow: 0 0 5px gold;
+  will-change: transform, opacity;
 }
 
 @keyframes sparkle-fade {
@@ -95,6 +100,7 @@ body {
   }
 }
 
+/* Контейнер - сердце по центру */
 .container {
   position: relative;
   z-index: 20;
@@ -102,56 +108,48 @@ body {
   width: 100%;
   padding: 30px;
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
   border-radius: 60px;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 
-    0 0 50px rgba(255, 0, 100, 0.5),
-    inset 0 0 30px rgba(255, 255, 255, 0.3);
-  animation: container-pulse 3s infinite;
+  box-shadow: 0 0 30px rgba(255, 0, 100, 0.3);
+  margin: 20px;
 }
 
-@keyframes container-pulse {
-  0%, 100% {
-    box-shadow: 0 0 50px rgba(255, 0, 100, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 80px rgba(255, 0, 150, 0.7), inset 0 0 50px rgba(255, 255, 255, 0.5);
-  }
-}
-
+/* Обертка сердца - центрирование */
 .heart-wrapper {
   position: relative;
-  margin: 20px 0;
+  margin: 0 auto;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .heart-ascii {
   color: white;
   font-size: 14px;
   line-height: 1.2;
-  text-shadow: 
-    0 0 20px red,
-    0 0 40px #ff4d4d,
-    0 0 60px #ff1a1a;
+  text-shadow: 0 0 10px red;
   white-space: pre;
   font-family: 'Courier New', monospace;
   position: relative;
   z-index: 2;
-  transition: all 0.3s;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .heart-ascii.pulse {
-  animation: heart-pulse 1.5s infinite;
+  animation: heart-pulse 2s infinite;
 }
 
 @keyframes heart-pulse {
   0%, 100% {
     transform: scale(1);
-    text-shadow: 0 0 20px red, 0 0 40px #ff4d4d;
+    text-shadow: 0 0 10px red;
   }
   50% {
-    transform: scale(1.02);
-    text-shadow: 0 0 30px red, 0 0 60px #ff4d4d, 0 0 90px #ff1a1a;
+    transform: scale(1.01);
+    text-shadow: 0 0 20px red, 0 0 30px #ff4d4d;
   }
 }
 
@@ -162,163 +160,72 @@ body {
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(255, 100, 100, 0.6) 0%, transparent 70%);
-  filter: blur(30px);
-  animation: glow-pulse 2s infinite;
+  background: radial-gradient(circle, rgba(255, 100, 100, 0.3) 0%, transparent 70%);
+  filter: blur(20px);
+  animation: glow-pulse 3s infinite;
   z-index: 1;
+  pointer-events: none;
 }
 
 @keyframes glow-pulse {
   0%, 100% {
-    opacity: 0.5;
+    opacity: 0.3;
     transform: translate(-50%, -50%) scale(1);
   }
   50% {
-    opacity: 0.8;
-    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.1);
   }
 }
 
 .message-container {
-  animation: slide-up-fade 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: slide-up-fade 0.8s ease-out;
+  text-align: center;
 }
 
 .valentine-message {
   text-align: center;
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
 .from, .to {
   display: block;
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 8px;
-  position: relative;
-  animation: letter-spacing 1.5s infinite alternate;
+  letter-spacing: 6px;
 }
 
 .from {
   color: #fff5e6;
-  text-shadow: 
-    0 0 10px #ffd700,
-    0 0 20px #ffd700,
-    0 0 30px #ff8c00,
-    0 0 40px #ff8c00;
-  margin-bottom: 15px;
+  text-shadow: 0 0 10px #ffd700;
+  margin-bottom: 10px;
 }
 
 .to {
   color: #ffe4b5;
-  text-shadow: 
-    0 0 10px #ff69b4,
-    0 0 20px #ff69b4,
-    0 0 30px #ff1493,
-    0 0 40px #ff1493;
+  text-shadow: 0 0 10px #ff69b4;
 }
 
-/* Глитч эффект */
+/* Глитч эффект - оптимизирован */
 .glitch .from,
 .glitch .to {
-  animation: glitch 0.3s infinite;
-  position: relative;
-}
-
-.glitch .from::before,
-.glitch .from::after,
-.glitch .to::before,
-.glitch .to::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.glitch .from::before,
-.glitch .to::before {
-  animation: glitch-top 0.3s infinite linear;
-  color: #ff00ff;
-  z-index: -1;
-}
-
-.glitch .from::after,
-.glitch .to::after {
-  animation: glitch-bottom 0.3s infinite linear;
-  color: #00ffff;
-  z-index: -2;
+  animation: glitch 0.2s infinite;
 }
 
 @keyframes glitch {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-  100% {
-    transform: translate(0);
-  }
-}
-
-@keyframes glitch-top {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-  100% {
-    transform: translate(0);
-  }
-}
-
-@keyframes glitch-bottom {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(2px, -2px);
-  }
-  40% {
-    transform: translate(2px, 2px);
-  }
-  60% {
-    transform: translate(-2px, -2px);
-  }
-  80% {
-    transform: translate(-2px, 2px);
-  }
-  100% {
-    transform: translate(0);
-  }
+  0%, 100% { transform: translate(0); }
+  25% { transform: translate(-1px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(1px, 1px); }
 }
 
 .heart-rain {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin: 30px 0;
-  font-size: 2.5rem;
+  gap: 10px;
+  margin: 20px 0;
+  font-size: 2rem;
 }
 
 .heart-rain span {
@@ -328,7 +235,7 @@ body {
 
 @keyframes heart-fall {
   0% {
-    transform: translateY(-20px) rotate(0deg);
+    transform: translateY(-10px) rotate(0deg);
     opacity: 0;
   }
   50% {
@@ -336,20 +243,20 @@ body {
     opacity: 1;
   }
   100% {
-    transform: translateY(20px) rotate(360deg);
+    transform: translateY(10px) rotate(360deg);
     opacity: 0;
   }
 }
 
 .message-card {
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 30px;
-  padding: 30px;
-  margin: 30px 0;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 500px;
   backdrop-filter: blur(5px);
   animation: card-float 3s infinite;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes card-float {
@@ -357,107 +264,65 @@ body {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
   }
 }
 
 .main-message {
   color: white;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-family: 'Arial', sans-serif;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .sub-message {
   color: #fff5e6;
-  font-size: 1.3rem;
-  line-height: 1.8;
+  font-size: 1.2rem;
+  line-height: 1.6;
   font-family: 'Arial', sans-serif;
-}
-
-.interactive-hearts {
-  margin: 30px 0;
 }
 
 .heart-button {
   background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
   border: none;
   color: white;
-  font-size: 1.5rem;
-  padding: 15px 40px;
+  font-size: 1.3rem;
+  padding: 12px 30px;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s;
   border: 2px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
-  animation: button-pulse 2s infinite;
+  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+  margin: 20px 0;
 }
 
 .heart-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.6);
-  background: linear-gradient(45deg, #ff8e8e, #ff6b6b);
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
 }
 
-@keyframes button-pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
+.heart-button:active {
+  transform: scale(0.95);
 }
 
 .love-counter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  font-size: 2.5rem;
+  margin-top: 20px;
+  font-size: 2rem;
   color: white;
-  margin-top: 30px;
 }
 
 .counter-number {
-  font-size: 3.5rem;
-  font-weight: bold;
-  animation: spin 4s linear infinite;
   display: inline-block;
+  animation: pulse 2s infinite;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.music-notes {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 2rem;
-  color: rgba(255, 255, 255, 0.3);
-  animation: notes-float 3s infinite;
-}
-
-.music-notes span {
-  display: inline-block;
-  animation: note-spin 2s infinite;
-  margin: 0 5px;
-}
-
-@keyframes note-spin {
+@keyframes pulse {
   0%, 100% {
-    transform: rotate(0deg) translateY(0);
+    opacity: 1;
   }
   50% {
-    transform: rotate(10deg) translateY(-10px);
+    opacity: 0.7;
   }
 }
 
@@ -468,8 +333,8 @@ body {
   }
   
   .from, .to {
-    font-size: 2.5rem;
-    letter-spacing: 4px;
+    font-size: 2.2rem;
+    letter-spacing: 3px;
   }
   
   .container {
@@ -478,7 +343,7 @@ body {
   }
   
   .main-message {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
   
   .sub-message {
@@ -486,28 +351,18 @@ body {
   }
   
   .heart-button {
-    font-size: 1.2rem;
-    padding: 12px 25px;
+    font-size: 1.1rem;
+    padding: 10px 20px;
   }
 }
 
-/* Дополнительные эффекты при загрузке */
 @keyframes slide-up-fade {
   from {
     opacity: 0;
-    transform: translateY(50px) scale(0.8);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes letter-spacing {
-  from {
-    letter-spacing: 8px;
-  }
-  to {
-    letter-spacing: 12px;
+    transform: translateY(0);
   }
 }
