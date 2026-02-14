@@ -1,16 +1,23 @@
-# React + Vite
+# Cars Manager — Управление автопарком
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <img src="https://img.shields.io/badge/React-19.2-blue" alt="React"> 
+  <img src="https://img.shields.io/badge/Vite-4.4-orange" alt="Vite"> 
+  <img src="https://img.shields.io/badge/Анимации-CSS-red" alt="Animations"> 
+  <img src="https://img.shields.io/badge/Адаптивный-UI-purple" alt="Adaptive UI"> 
+  <img src="https://img.shields.io/badge/GitHub%20Pages-деплой-success" alt="GitHub Pages"> 
+  <img src="https://img.shields.io/badge/Сделано%20с-любовью-ff69b4" alt="Made with love">
+</p>
 
-Currently, two official plugins are available:
+**Valentine for Masha** — интерактивная веб-валентинка с анимированным ASCII-сердцем, созданная специально для Маши от Сережи. Проект выполнен на React + Vite с множеством визуальных эффектов и оптимизацией производительности.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Особенности
 
-## React Compiler
+- **Анимированное ASCII-сердце** — большое сердце из символов с эффектом печатания и пульсацией
+- **Множество анимаций** — летающие сердечки, искры, глитч-эффект, дождь из сердец
+- **Полная адаптивность** — корректное отображение на всех устройствах
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+## Демо вебсайта
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+https://siega52.github.io/heartfelt-code/
