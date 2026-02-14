@@ -12,7 +12,6 @@ function App() {
   const sparkleIntervalRef = useRef(null);
   const glitchIntervalRef = useRef(null);
   
-  // Увеличенное и более детальное сердце
   const bigHeart = `⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀00000000000000⠀⠀⠀⠀⠀00000000000000⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀000000000000000000⠀⠀0000000000000000000⠀⠀⠀⠀
@@ -46,36 +45,31 @@ function App() {
     };
   }, []);
 
-  // Оптимизированная генерация летающих сердечек (с ограничением)
   useEffect(() => {
     if (!showMessage) return;
 
-    // Очищаем предыдущий интервал
     if (heartIntervalRef.current) clearInterval(heartIntervalRef.current);
 
     heartIntervalRef.current = setInterval(() => {
       setFloatingHearts(prev => {
-        // Ограничиваем количество сердечек до 15
         const newHeart = {
           id: Date.now() + Math.random(),
           left: Math.random() * 100,
-          size: Math.random() * 20 + 15, // Уменьшил размер
+          size: Math.random() * 20 + 15,
           speed: Math.random() * 4 + 3,
           emoji: ['❤️', '💖', '💝', '💕', '💗'][Math.floor(Math.random() * 5)]
         };
         
-        // Добавляем новое и удаляем старые, если больше 15
         const updated = [...prev.slice(-14), newHeart];
         return updated;
       });
-    }, 500); // Увеличил интервал до 500ms
+    }, 500);
 
     return () => {
       if (heartIntervalRef.current) clearInterval(heartIntervalRef.current);
     };
   }, [showMessage]);
 
-  // Оптимизированная генерация искр
   useEffect(() => {
     if (!showMessage) return;
 
@@ -91,39 +85,37 @@ function App() {
             y: rect.top + Math.random() * rect.height,
             size: Math.random() * 3 + 1,
           };
-          // Ограничиваем до 10 искр
+
           const updated = [...prev.slice(-9), newSparkle];
           return updated;
         });
 
-        // Удаляем искры через 1 секунду
+
         setTimeout(() => {
           setSparkles(prev => prev.slice(1));
         }, 1000);
       }
-    }, 300); // Увеличил интервал до 300ms
+    }, 300);
 
     return () => {
       if (sparkleIntervalRef.current) clearInterval(sparkleIntervalRef.current);
     };
   }, [showMessage]);
 
-  // Эффект печатания сердца
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
       if (index <= bigHeart.length) {
         setHeart(bigHeart.slice(0, index));
-        index += 2; // Увеличил шаг для более быстрой печати
+        index += 2;
       } else {
         clearInterval(interval);
         setTimeout(() => setShowMessage(true), 300);
         
-        // Глитч эффект
         glitchIntervalRef.current = setInterval(() => {
           setGlitchText(true);
           setTimeout(() => setGlitchText(false), 150);
-        }, 4000); // Увеличил интервал глитча до 4 секунд
+        }, 4000);
 
         return () => {
           if (glitchIntervalRef.current) clearInterval(glitchIntervalRef.current);
@@ -134,7 +126,6 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  // Оптимизированная функция создания сердечка по клику
   const createHeart = useCallback(() => {
     setFloatingHearts(prev => {
       const newHeart = {
@@ -150,7 +141,6 @@ function App() {
 
   return (
     <div className="app">
-      {/* Фон с частицами (уменьшил количество до 25) */}
       <div className="particle-background">
         {[...Array(25)].map((_, i) => (
           <div
@@ -165,7 +155,6 @@ function App() {
         ))}
       </div>
 
-      {/* Летающие сердечки */}
       {floatingHearts.map(heart => (
         <div
           key={heart.id}
@@ -180,7 +169,6 @@ function App() {
         </div>
       ))}
 
-      {/* Искры над сердцем */}
       {sparkles.map(sparkle => (
         <div
           key={sparkle.id}
@@ -205,34 +193,20 @@ function App() {
         {showMessage && (
           <div className="message-container">
             <h1 className={`valentine-message ${glitchText ? 'glitch' : ''}`}>
-              <span className="from" data-text="От Сережи">От Сережи</span>
-              <span className="to" data-text="Кому Маше">Кому Маше</span>
+              <span className="from" data-text="От Сережи">От: Сережи</span>
+              <span className="to" data-text="Кому Маше">Кому: Маше</span>
             </h1>
             
             <div className="heart-rain">
-              {[...Array(3)].map((_, i) => ( // Уменьшил до 3
-                <span key={i} style={{ animationDelay: `${i * 0.2}s` }}>❤️</span>
+              {[...Array(3)].map((_, i) => (
+                <span key={i} style={{ animationDelay: `${i * 0.2}s` }}><img src="/src/assets/img/1.png" alt="#"/></span>
               ))}
             </div>
 
             <div className="message-card">
               <p className="main-message">
-                С Днём Святого Валентина, Маша! 💝
-              </p>
-              <p className="sub-message">
-                Ты делаешь мою жизнь ярче каждый день!
-              </p>
-            </div>
-
-            <button 
-              className="heart-button"
-              onClick={createHeart}
-            >
-              💝 Отправить сердечко 💝
-            </button>
-
-            <div className="love-counter">
-              <span className="counter-number">❤️ ∞ ❤️</span>
+                Ты, конечно, не JavaScript, но когда ты рядом, мой null превращается в object
+              </p>  
             </div>
           </div>
         )}

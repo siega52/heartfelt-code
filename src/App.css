@@ -13,14 +13,16 @@ body {
   width: 100vw;
   height: 100vh;
   position: relative;
-  background: linear-gradient(135deg, #ff0844 0%, #ff4b8c 50%, #ff6b95 100%);
+  background-image: url('/src/assets/img/cat.png');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
 
-/* Фон с частицами - оптимизировано */
 .particle-background {
   position: absolute;
   width: 100%;
