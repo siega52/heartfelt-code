@@ -58,7 +58,6 @@ body {
   }
 }
 
-/* Летающие сердечки - оптимизировано */
 .floating-heart {
   position: absolute;
   bottom: -50px;
@@ -103,7 +102,6 @@ body {
   }
 }
 
-/* Искры - оптимизировано */
 .sparkle {
   position: absolute;
   background: white;
@@ -125,7 +123,6 @@ body {
   }
 }
 
-/* Контейнер - сердце по центру */
 .container {
   position: relative;
   z-index: 20;
@@ -140,7 +137,6 @@ body {
   margin: 20px;
 }
 
-/* Обертка сердца - центрирование */
 .heart-wrapper {
   position: relative;
   margin: 0 auto;
@@ -232,7 +228,6 @@ body {
   text-shadow: 0 0 10px #ff69b4;
 }
 
-/* Глитч эффект - оптимизирован */
 .glitch .from,
 .glitch .to {
   animation: glitch 0.2s infinite;
