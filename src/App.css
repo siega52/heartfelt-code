@@ -69,6 +69,29 @@ body {
   filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
 }
 
+.floating-heart-image {
+  position: absolute;
+  bottom: -50px;
+  animation: float-up-image linear infinite;
+  pointer-events: none;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@keyframes float-up-image {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
 @keyframes float-up {
   0% {
     transform: translateY(0) rotate(0deg);

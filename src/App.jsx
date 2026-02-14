@@ -1,5 +1,12 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import './App.css';
+import heart1 from '/src/assets/img/2.png';
+import heart2 from '/src/assets/img/3.png';
+import heart3 from '/src/assets/img/4.png';
+import heart4 from '/src/assets/img/5.png';
+import heart5 from '/src/assets/img/6.png';
+import heart6 from '/src/assets/img/7.png';
+import heart7 from '/src/assets/img/8.png';
 
 function App() {
   const [heart, setHeart] = useState('');
@@ -11,6 +18,7 @@ function App() {
   const heartIntervalRef = useRef(null);
   const sparkleIntervalRef = useRef(null);
   const glitchIntervalRef = useRef(null);
+  const heartImages = [heart1, heart2, heart3, heart4, heart5, heart6, heart7];
   
   const bigHeart = `⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀00000000000000⠀⠀⠀⠀⠀00000000000000⠀⠀⠀⠀⠀⠀⠀
@@ -55,9 +63,14 @@ function App() {
         const newHeart = {
           id: Date.now() + Math.random(),
           left: Math.random() * 100,
-          size: Math.random() * 20 + 15,
+          size: Math.random() * 30 + 20,
           speed: Math.random() * 4 + 3,
-          emoji: ['❤️', '💖', '💝', '💕', '💗'][Math.floor(Math.random() * 5)]
+          // Выбираем случайное изображение из массива
+          image: heartImages[Math.floor(Math.random() * heartImages.length)],
+          // Или если хочешь добавить вариаций с rotation
+          rotation: Math.random() * 360,
+          // Разная opacity для разнообразия
+          opacity: Math.random() * 0.5 + 0.5
         };
         
         const updated = [...prev.slice(-14), newHeart];
@@ -126,19 +139,6 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const createHeart = useCallback(() => {
-    setFloatingHearts(prev => {
-      const newHeart = {
-        id: Date.now(),
-        left: Math.random() * 100,
-        size: 35,
-        speed: 4,
-        emoji: '💖'
-      };
-      return [...prev.slice(-14), newHeart];
-    });
-  }, []);
-
   return (
     <div className="app">
       <div className="particle-background">
@@ -156,17 +156,24 @@ function App() {
       </div>
 
       {floatingHearts.map(heart => (
-        <div
+        <img
           key={heart.id}
-          className="floating-heart"
+          src={heart.image}
+          alt="heart"
+          className="floating-heart-image"
           style={{
             left: `${heart.left}%`,
-            fontSize: `${heart.size}px`,
+            width: `${heart.size}px`,
+            height: 'auto',
             animationDuration: `${heart.speed}s`,
+            transform: `rotate(${heart.rotation || 0}deg)`,
+            opacity: heart.opacity || 1,
+            position: 'absolute',
+            bottom: '-50px',
+            zIndex: 10,
+            pointerEvents: 'none'
           }}
-        >
-          {heart.emoji}
-        </div>
+        />
       ))}
 
       {sparkles.map(sparkle => (
