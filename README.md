@@ -6,7 +6,6 @@
   <img src="https://img.shields.io/badge/Анимации-CSS-red" alt="Animations"> 
   <img src="https://img.shields.io/badge/Адаптивный-UI-purple" alt="Adaptive UI"> 
   <img src="https://img.shields.io/badge/GitHub%20Pages-деплой-success" alt="GitHub Pages"> 
-  <img src="https://img.shields.io/badge/Сделано%20с-любовью-ff69b4" alt="Made with love">
 </p>
 
 **Valentine for Masha** — интерактивная веб-валентинка с анимированным ASCII-сердцем, созданная специально для Маши от Сережи. Проект выполнен на React + Vite с множеством визуальных эффектов и оптимизацией производительности.
