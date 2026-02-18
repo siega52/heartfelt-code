@@ -1,4 +1,4 @@
-# Cars Manager — Управление автопарком
+# heartfelt code — валентинка для Маши
 
 <p align="center">
   <img src="https://img.shields.io/badge/React-19.2-blue" alt="React"> 
